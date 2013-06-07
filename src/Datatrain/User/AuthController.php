@@ -82,9 +82,10 @@ class AuthController extends \BaseController {
                 
                 Mail::send(Config::get('user::forgotEmail'), $user_data, function($message) use ($user_data)
                 {
-                    $message->from('webmaster@example.com', 'Webmaster');
+                    $message->from(Config::get('user::emailSenderAddress'), Config::get('user::emailSenderName'));
                     $message->to($user_data['email']);
-                });
+                    $message->subject(Config::get('user::emailPasswordSubject'));
+});
             }      
             $message = "Please check your email and confirm your password reset request";
         } catch (UserNotFoundException $e) {

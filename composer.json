@@ -1,6 +1,7 @@
 {
     "name": "datatrain/user",
     "description": "Extension of the Cartalyst Sentry authorisation package. Provides ready to go controllers and views for easy prototyping",
+    "license": "MIT",
     "authors": [
         {
             "name": "David Woolley",

@@ -25,8 +25,8 @@ Once Composer has installed or updated your packages you need to register User w
 ### Configuration
 Whilst this package comes 'pre-configured', most users will want to substitute their own layout, views and templates. This is achieved in Laravel using the artisan config:publish command
 
-...php
-php artisan config:publish datatrain/user
-...
+```
+$ php artisan config:publish datatrain/user
+```
 
 This will publish `config.php` in the `app/config/packages/datatrain/user` directory. You may also specify an environment specific directory if desired.

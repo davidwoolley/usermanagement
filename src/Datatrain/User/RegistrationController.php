@@ -52,8 +52,9 @@ class RegistrationController extends \BaseController {
                 
                 Mail::send(Config::get('user::activationEmail'), $user_data, function($message) use ($user_data)
                 {
-                    $message->from('webmaster@example.com', 'Webmaster');
+                    $message->from(Config::get('user::emailSenderAddress'), Config::get('user::emailSenderName'));
                     $message->to($user_data['email']);
+                    $message->subject(Config::get('user::emailActivationSubject'));
                 });
 //                $email_content = View::make('email/activation')->with($user)->render();
 
