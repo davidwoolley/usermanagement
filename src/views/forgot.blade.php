@@ -1,3 +1,5 @@
+@extends('user::layout.default')
+
 @section('content')
 <form action="{{ URL::to('/forgotpassword') }}" id="password-reset-form" class="form-horizontal well" method="POST" accept-char="UTF-8">
     {{ Form::token(); }}
@@ -26,4 +28,4 @@
 		<button class="btn btn-primary" type="submit"/>Reset</button>
 	</div>
 </form>
-@endsection
+@stop

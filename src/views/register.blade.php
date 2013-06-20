@@ -1,4 +1,4 @@
-@layout('layout.basic')
+@extends('user::layout.default')
 
 @section('content')
 <form action="{{ URL::to('/register') }}" id="register-form" class="form-horizontal well" method="POST" accept-char="UTF-8">
@@ -93,4 +93,4 @@
 		<button class="btn btn-primary" type="submit">Register</button>
 	</div>
 </form>
-@endsection
+@stop

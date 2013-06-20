@@ -15,10 +15,8 @@ use Mail;
 
 class AuthController extends \BaseController {
 
-    protected $layout = 'user::layout.default';
-
     public function showLoginform() {
-        $this->layout->content = View::make(Config::get('user::loginView'));
+        return View::make(Config::get('user::loginView'));
     }
 
     public function processLogin() {
@@ -66,7 +64,7 @@ class AuthController extends \BaseController {
     }
 
     public function showForgotPasswordForm() {
-        $this->layout->content = View::make(Config::get('user::forgotView'));
+        return View::make(Config::get('user::forgotView'));
     }
 
     public function processForgotPasswordForm() {
@@ -83,6 +81,7 @@ class AuthController extends \BaseController {
                 Mail::send(Config::get('user::forgotEmail'), $user_data, function($message) use ($user_data)
                 {
                     $message->from(Config::get('user::emailSenderAddress'), Config::get('user::emailSenderName'));
+//                    $message->from('fred@example.com', Config::get('user::emailSenderName'));
                     $message->to($user_data['email']);
                     $message->subject(Config::get('user::emailPasswordSubject'));
 });
@@ -90,7 +89,7 @@ class AuthController extends \BaseController {
             $message = "Please check your email and confirm your password reset request";
         } catch (UserNotFoundException $e) {
             $message = 'User was not found.';
-            Log::error(sprintf("processForgotPasswordForm() - Exception: %s", $e->getMessage));            
+            Log::error(sprintf("processForgotPasswordForm() - Exception: %s", $e->getMessage()));            
         }
         return Redirect::to('/forgotpassword')->with('message', $message);
     }
@@ -98,7 +97,7 @@ class AuthController extends \BaseController {
     public function showForgotPasswordConfirmationForm($hash) {
         try {
             $user = Sentry::getUserProvider()->findByResetPasswordCode($hash);
-            $this->layout->content = View::make(Config::get('user::forgotConfirmationView'))->with('hash', $hash);
+            return View::make(Config::get('user::forgotConfirmationView'))->with('hash', $hash);
         } catch (UserNotFoundException $e) {
             $message = 'User was not found.';
             Log::error(sprintf("processForgotPasswordConfirmationForm() - Exception: %s", $e->getMessage()));

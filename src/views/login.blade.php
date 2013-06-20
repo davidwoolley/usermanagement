@@ -1,3 +1,4 @@
+@extends('user::layout.default')
 
 @section('content')
 <form class="form-horizontal well" action="{{ URL::to('/login') }}" method="post">
@@ -29,4 +30,4 @@
     </div>
   </div>
 </form>
-@endsection
+@stop

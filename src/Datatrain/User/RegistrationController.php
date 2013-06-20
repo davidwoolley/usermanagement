@@ -18,8 +18,6 @@ use Mail;
 use Cartalyst\Sentry\Users\UserNotFoundException;
 
 class RegistrationController extends \BaseController {
-    protected $layout = 'user::layout.default';
-
     protected static $_rules = array(
         'first_name' => 'required',
         'last_name' => 'required',
@@ -30,7 +28,7 @@ class RegistrationController extends \BaseController {
     );
     
     public function showRegistrationForm() {
-        $this->layout->content = View::make(Config::get('user::registrationView'));
+        return View::make(Config::get('user::registrationView'));
     }
 
     public function processRegistration() {
