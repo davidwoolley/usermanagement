@@ -12,6 +12,7 @@ use Config;
 use Cartalyst\Sentry\Users\UserNotFoundException;
 use URL;
 use Mail;
+use Illuminate\Support\Facades\Event;
 
 class AuthController extends \BaseController {
 
@@ -22,6 +23,7 @@ class AuthController extends \BaseController {
     public function processLogin() {
         // Log the user out
         Sentry::logout();
+        Event::fire('user.logout');
 
         $email = Input::get('email');
         $password = Input::get('password');
@@ -31,6 +33,7 @@ class AuthController extends \BaseController {
 
             if (Sentry::authenticate($credentials, Input::get('remember'))) {
                 Log::info(sprintf("User %s sucessfully authenticated", $email));
+                Event::fire('user.login');
                 return Redirect::to('/');
             }
             Log::info(sprintf("User %s failed to authenticate", $email));
@@ -60,6 +63,9 @@ class AuthController extends \BaseController {
     public function processLogout() {
         Sentry::logout();
         Session::flush();
+
+        Event::fire('user.logout');
+
         return Redirect::to('/');
     }
 
