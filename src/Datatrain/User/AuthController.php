@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Event;
 class AuthController extends \BaseController {
 
     public function showLoginform() {
-        return View::make(Config::get('user::loginView'));
+        return View::make(Config::get('user::loginView'))->with(array('title'=>'Login'));
     }
 
     public function processLogin() {
@@ -70,7 +70,7 @@ class AuthController extends \BaseController {
     }
 
     public function showForgotPasswordForm() {
-        return View::make(Config::get('user::forgotView'));
+        return View::make(Config::get('user::forgotView'))->with(array('title'=>'Forgot Password'));
     }
 
     public function processForgotPasswordForm() {
@@ -103,7 +103,7 @@ class AuthController extends \BaseController {
     public function showForgotPasswordConfirmationForm($hash) {
         try {
             $user = Sentry::getUserProvider()->findByResetPasswordCode($hash);
-            return View::make(Config::get('user::forgotConfirmationView'))->with('hash', $hash);
+            return View::make(Config::get('user::forgotConfirmationView'))->with(array('title'=>'Login', 'hash'=>$hash));
         } catch (UserNotFoundException $e) {
             $message = 'User was not found.';
             Log::error(sprintf("processForgotPasswordConfirmationForm() - Exception: %s", $e->getMessage()));

@@ -28,7 +28,7 @@ class RegistrationController extends \BaseController {
     );
     
     public function showRegistrationForm() {
-        return View::make(Config::get('user::registrationView'));
+        return View::make(Config::get('user::registrationView'))->with(array('title'=>'Register'));
     }
 
     public function processRegistration() {
