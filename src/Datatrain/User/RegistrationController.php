@@ -65,6 +65,7 @@ class RegistrationController extends \BaseController {
 
 //                $mailer->send($message);
 
+                Event::fire('user.register', $user);
                 Log::info(sprintf("processRegistration() - User %s sucessfully registered", $user_data['email']));
                 return Redirect::to('/login')->with('message', 'Please check your email and activate your login');
             }

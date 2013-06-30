@@ -61,10 +61,10 @@ class AuthController extends \BaseController {
     }
 
     public function processLogout() {
+        Event::fire('user.logout', Session::get('visitId'));
+
         Sentry::logout();
         Session::flush();
-
-        Event::fire('user.logout');
 
         return Redirect::to('/');
     }
@@ -75,6 +75,7 @@ class AuthController extends \BaseController {
 
     public function processForgotPasswordForm() {
         $email = Input::get("email");
+        Event::fire('user.forgotpassword', Session::get('visitId'));
         
         try {
             $user = Sentry::getUserProvider()->findByLogin($email);
