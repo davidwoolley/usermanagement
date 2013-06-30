@@ -16,6 +16,7 @@ use Redirect;
 use URL;
 use Mail;
 use Cartalyst\Sentry\Users\UserNotFoundException;
+use Illuminate\Support\Facades\Event;
 
 class RegistrationController extends \BaseController {
     protected static $_rules = array(
