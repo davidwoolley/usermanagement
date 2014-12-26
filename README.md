@@ -30,3 +30,5 @@ $ php artisan config:publish datatrain/user
 ```
 
 This will publish `config.php` in the `app/config/packages/datatrain/user` directory. You may also specify an environment specific directory if desired.
+
+This project is no longer maintained. If you are interested in taking ownership please let me know.
